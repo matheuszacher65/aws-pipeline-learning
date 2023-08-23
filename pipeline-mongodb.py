@@ -26,6 +26,7 @@ mongo_collection = mongo_db[collection_name]
 
 
 
+# grab all documents with a event_timestamp field value between two dates defined in the script
 start_date = datetime.datetime.today() + timedelta(days = -1)
 end_date = start_date + timedelta(days = 1 )
 
