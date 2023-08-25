@@ -30,15 +30,17 @@ bucket_name = parser.get("aws_boto_credentials", "bucket_name")
 # run the COPY command to load the file into Redshift
 file_path = ("s3://" + bucket_name + "/order_extract.csv")
 role_string = ("arn:aws:iam::" + account_id + ":role/" + iam_role)
+region = 'us-east-2'
 
 sql = "COPY public.Orders"
 sql = sql + " from %s "
-sql = sql + " iam_role %s;"
+sql = sql + " iam_role %s"
+sql = sql + " region %s;"
 
 
 # create a cursor object and execute the COPY
 cur = rs_conn.cursor()
-cur.execute(sql,(file_path, role_string))
+cur.execute(sql,(file_path, role_string, region))
 
 
 # close the cursor and commit the transaction
